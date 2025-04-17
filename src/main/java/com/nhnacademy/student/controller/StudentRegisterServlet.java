@@ -26,6 +26,7 @@ public class StudentRegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        req.setAttribute("action","/student/register");
         req.getRequestDispatcher("/WEB-INF/register.jsp").forward(req, res);
     }
 
@@ -38,6 +39,7 @@ public class StudentRegisterServlet extends HttpServlet {
         Gender gender = genderParam.equals("M") ? Gender.M : Gender.F;
         int age = Integer.parseInt(ageParam);
         Student student;
+
         try {
             student = new Student(id, name, gender, age, LocalDateTime.now());
             studentRepository.save(student);
@@ -46,6 +48,7 @@ public class StudentRegisterServlet extends HttpServlet {
             res.sendError(HttpServletResponse.SC_BAD_REQUEST,e.getMessage());
             return;
         }
+
         res.sendRedirect("/student/view?id=" + id);
     }
 }

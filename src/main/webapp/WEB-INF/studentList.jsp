@@ -30,7 +30,10 @@
       <td>${student.age}</td>
       <td>
         <a href="${pageContext.request.contextPath}/student/update?id=${student.id}">수정</a>
-        <a href="${pageContext.request.contextPath}/student/delete?id=${student.id}">삭제</a>
+        <form method="post" action="${pageContext.request.contextPath}/student/delete" style="display:inline;">
+          <input type="hidden" name="id" value="${student.id}" />
+          <button type="submit">삭제</button>
+        </form>
       </td>
     </tr>
   </c:forEach>

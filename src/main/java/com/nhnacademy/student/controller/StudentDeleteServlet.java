@@ -1,7 +1,5 @@
 package com.nhnacademy.student.controller;
 
-import ch.qos.logback.core.util.StringUtil;
-import com.nhnacademy.student.domain.Student;
 import com.nhnacademy.student.repository.StudentRepository;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -14,8 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j
-@WebServlet(name = "studentViewServlet", value = "/student/view")
-public class StudentViewServlet extends HttpServlet {
+@WebServlet(name = "studentDeleteServlet", value = "/student/delete")
+public class StudentDeleteServlet extends HttpServlet {
+
     private StudentRepository studentRepository;
 
     @Override
@@ -24,17 +23,15 @@ public class StudentViewServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
+
         if (!studentRepository.existById(id)) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"존재하지 않는 회원입니다");
-            return;
+            throw new IllegalArgumentException("존재하지 않는 회원입니다");
         }
-        Student student = studentRepository.getStudentById(id);
-        req.setAttribute("student", student);
-        if (StringUtil.isNullOrEmpty(id)) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"올바르지 않은 회원 조회입니다");
-        }
-        req.getRequestDispatcher("/WEB-INF/view.jsp").forward(req, resp);
+
+        studentRepository.deleteById(id);
+
+        resp.sendRedirect("/student/list");
     }
 }
