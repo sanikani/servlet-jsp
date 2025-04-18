@@ -1,6 +1,6 @@
 package com.nhnacademy.student.controller;
 
-import com.nhnacademy.student.domain.Gender;
+import com.nhnacademy.student.config.RequestMapping;
 import com.nhnacademy.student.domain.Student;
 import com.nhnacademy.student.exception.ApiException;
 import com.nhnacademy.student.repository.StudentRepository;
@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDateTime;
 
 @Slf4j
+@RequestMapping(value = "/student/update.do", method = RequestMapping.Method.POST)
 public class StudentUpdateController implements Command{
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -21,22 +21,16 @@ public class StudentUpdateController implements Command{
             throw new IllegalArgumentException("존재하지 않는 회원입니다");
         }
 
-        Student student = studentRepository.getStudentById(id);
-
         try {
-            studentRepository.update(new Student(
-                    id,
-                    req.getParameter("name"),
-                    Gender.valueOf(req.getParameter("gender")),
-                    Integer.parseInt(req.getParameter("age")),
-                    LocalDateTime.now())
-            );
+            Student student = studentRepository.getStudentById(id);
+            student.setName(req.getParameter("name"));
+            student.setAge(Integer.parseInt(req.getParameter("age")));
+            studentRepository.update(student);
         } catch (IllegalArgumentException e) {
             log.error("Student 필드 오류", e);
             throw new ApiException(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
         }
-        req.setAttribute("id", student.getId());
-//        return "redirect:/student/view?id=" + student.getId();
-        return "redirect:/student/view.do";
+
+        return "redirect:/student/view.do?id=" + id;
     }
 }

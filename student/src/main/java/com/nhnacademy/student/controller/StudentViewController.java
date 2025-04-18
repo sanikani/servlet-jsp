@@ -1,6 +1,7 @@
 package com.nhnacademy.student.controller;
 
 import ch.qos.logback.core.util.StringUtil;
+import com.nhnacademy.student.config.RequestMapping;
 import com.nhnacademy.student.domain.Student;
 import com.nhnacademy.student.exception.ApiException;
 import com.nhnacademy.student.repository.StudentRepository;
@@ -15,12 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j
+@RequestMapping(value = "/student/view.do", method = RequestMapping.Method.GET)
 public class StudentViewController implements Command {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         StudentRepository studentRepository = (StudentRepository) req.getServletContext().getAttribute("studentRepository");
-
+        log.debug("View Student Id: {}", req.getParameter("id"));
         String id = req.getParameter("id");
         if (!studentRepository.existById(id)) {
             throw new ApiException(HttpServletResponse.SC_BAD_REQUEST, "존재하지 않는 회원입니다");

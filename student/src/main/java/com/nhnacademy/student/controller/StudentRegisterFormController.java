@@ -1,5 +1,6 @@
 package com.nhnacademy.student.controller;
 
+import com.nhnacademy.student.config.RequestMapping;
 import com.nhnacademy.student.domain.Gender;
 import com.nhnacademy.student.domain.Student;
 import com.nhnacademy.student.repository.StudentRepository;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Slf4j
+@RequestMapping(value = "/student/register.do", method = RequestMapping.Method.GET)
 public class StudentRegisterFormController implements Command {
 
     @Override
