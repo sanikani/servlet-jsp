@@ -17,16 +17,12 @@ public class ErrorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //todo exception_type
-        log.debug("exceptionType={}",req.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE));
         req.setAttribute("exceptionType",req.getAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE));
         //todo message
-        log.debug("exceptionType={}",req.getAttribute(RequestDispatcher.ERROR_MESSAGE));
         req.setAttribute("message",req.getAttribute(RequestDispatcher.ERROR_MESSAGE));
         //todo exception
-        log.debug("exceptionType={}",req.getAttribute(RequestDispatcher.ERROR_EXCEPTION));
         req.setAttribute("exception",req.getAttribute(RequestDispatcher.ERROR_EXCEPTION));
         //todo request_uri
-        log.debug("exceptionType={}",req.getAttribute(RequestDispatcher.ERROR_REQUEST_URI));
         req.setAttribute("requestURI", req.getAttribute(RequestDispatcher.ERROR_REQUEST_URI));
 
         //todo /error.jsp forward 처리

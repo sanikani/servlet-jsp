@@ -11,7 +11,7 @@
   <tbody>
   <tr>
     <th>status_code</th>
-    <td><c:out value="${requestScope['jakarta.servlet.error.status_code']}" /></td>
+    <td><c:out value="${statusCode}" /></td>
   </tr>
   <tr>
     <th>exception_type</th>
