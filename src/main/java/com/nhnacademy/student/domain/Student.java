@@ -1,19 +1,20 @@
 package com.nhnacademy.student.domain;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class Student {
+@NoArgsConstructor
+public class Student{
     private String id;
     private String name;
     @Setter
     private Gender gender;
     private int age;
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     public Student(String id, String name, Gender gender, int age, LocalDateTime createdAt) {
         if (id == null || name == null) {

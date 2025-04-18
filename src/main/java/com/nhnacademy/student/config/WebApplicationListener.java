@@ -2,7 +2,7 @@ package com.nhnacademy.student.config;
 
 import com.nhnacademy.student.domain.Gender;
 import com.nhnacademy.student.domain.Student;
-import com.nhnacademy.student.repository.MapStudentRepository;
+import com.nhnacademy.student.repository.JsonStudentRepository;
 import com.nhnacademy.student.repository.StudentRepository;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
@@ -20,7 +20,7 @@ public class WebApplicationListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         log.info("WebApplicationListener initialized!");
         ServletContext context = sce.getServletContext();
-        StudentRepository studentRepository = new MapStudentRepository();
+        StudentRepository studentRepository = new JsonStudentRepository();
 
         for (int i = 1; i <= 10; i++) {
             Gender gender;

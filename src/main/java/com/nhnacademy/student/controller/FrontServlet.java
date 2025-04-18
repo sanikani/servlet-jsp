@@ -28,7 +28,6 @@ public class FrontServlet extends HttpServlet {
 
         try {
             Command command = resolveServlet(req.getServletPath(), req.getMethod());
-
             if (command == null) {
                 throw new ApiException(HttpServletResponse.SC_NOT_FOUND, "요청한 경로를 찾을 수 없습니다");
             }
@@ -42,11 +41,11 @@ public class FrontServlet extends HttpServlet {
                 }
                 view = command.execute(req, resp);
                 req.getRequestDispatcher(view).include(req, resp);
-//                resp.sendRedirect(view.substring(REDIRECT_PREFIX.length()));
             } else {
                 log.debug("view={}",view);
                 req.getRequestDispatcher(view).include(req, resp);
             }
+
         } catch (Exception e) {
 
             int statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
@@ -59,7 +58,7 @@ public class FrontServlet extends HttpServlet {
             req.setAttribute("message", e.getMessage());
             req.setAttribute("exception", e);
             req.setAttribute("requestURI", req.getRequestURI());
-            req.getRequestDispatcher("/error.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/error.jsp").forward(req,resp);
         }
     }
 
