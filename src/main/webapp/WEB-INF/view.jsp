@@ -53,9 +53,9 @@
 </table>
 
 <div class="action-buttons">
-  <a href="${pageContext.request.contextPath}/student/list">리스트</a>
-  <a href="${pageContext.request.contextPath}/student/update?id=${student.id}">수정</a>
-  <form action="${pageContext.request.contextPath}/student/delete" method="post" style="display:inline;">
+  <a href="${pageContext.request.contextPath}/student/list.do">리스트</a>
+  <a href="${pageContext.request.contextPath}/student/update.do?id=${student.id}">수정</a>
+  <form action="${pageContext.request.contextPath}/student/delete.do" method="post" style="display:inline;">
     <input type="hidden" name="id" value="${student.id}">
     <input type="submit" value="삭제">
   </form>

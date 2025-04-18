@@ -26,8 +26,8 @@ public class StudentRegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        req.setAttribute("action","/student/register");
-        req.getRequestDispatcher("/WEB-INF/register.jsp").forward(req, res);
+        req.setAttribute("action","/student/register.do");
+        req.setAttribute("view", "/WEB-INF/register.jsp");
     }
 
     @Override
@@ -49,6 +49,6 @@ public class StudentRegisterServlet extends HttpServlet {
             return;
         }
 
-        res.sendRedirect("/student/view?id=" + id);
+        req.setAttribute("view", "redirect:/student/view?id=" + id);
     }
 }

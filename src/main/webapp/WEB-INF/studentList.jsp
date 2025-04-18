@@ -4,12 +4,11 @@
 <html>
 <head>
   <title>student - list</title>
-  <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
 <h1>학생 리스트</h1>
-<p><a href="/student/register" >학생(등록)</a></p>
+<p><a href="/student/register.do" >학생(등록)</a></p>
 <table>
   <thead>
   <tr>
@@ -29,8 +28,8 @@
       <td>${student.gender}</td>
       <td>${student.age}</td>
       <td>
-        <a href="${pageContext.request.contextPath}/student/update?id=${student.id}">수정</a>
-        <form method="post" action="${pageContext.request.contextPath}/student/delete" style="display:inline;">
+        <a href="${pageContext.request.contextPath}/student/update.do?id=${student.id}">수정</a>
+        <form method="post" action="${pageContext.request.contextPath}/student/delete.do" style="display:inline;">
           <input type="hidden" name="id" value="${student.id}" />
           <button type="submit">삭제</button>
         </form>

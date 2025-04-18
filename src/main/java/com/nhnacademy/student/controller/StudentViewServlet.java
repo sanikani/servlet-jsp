@@ -35,6 +35,8 @@ public class StudentViewServlet extends HttpServlet {
         if (StringUtil.isNullOrEmpty(id)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"올바르지 않은 회원 조회입니다");
         }
+//        req.setAttribute("view","/WEB-INF/view.jsp");
+//        log.debug("viewServlet.doGet");
         req.getRequestDispatcher("/WEB-INF/view.jsp").forward(req, resp);
     }
 }

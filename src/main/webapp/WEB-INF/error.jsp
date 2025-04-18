@@ -4,7 +4,6 @@
 <html>
 <head>
   <title>Error Page</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 

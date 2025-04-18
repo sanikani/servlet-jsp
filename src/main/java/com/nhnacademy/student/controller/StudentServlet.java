@@ -26,6 +26,7 @@ public class StudentServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("StudentServlet.doGet");
         req.setAttribute("studentList", studentRepository.getStudents());
-        req.getRequestDispatcher("/WEB-INF/studentList.jsp").forward(req, resp);
+        req.setAttribute("view","/WEB-INF/studentList.jsp");
+//        req.getRequestDispatcher("/WEB-INF/studentList.jsp").forward(req, resp);
     }
 }

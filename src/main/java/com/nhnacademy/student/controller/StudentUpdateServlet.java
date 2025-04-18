@@ -32,10 +32,10 @@ public class StudentUpdateServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "존재하지 않는 회원입니다");
         }
         req.setAttribute("student", studentRepository.getStudentById(req.getParameter("id")));
-        req.setAttribute("action", "/student/update");
+        req.setAttribute("action", "/student/update.do");
 
         //todo forward : /student/register.jsp
-        req.getRequestDispatcher("/WEB-INF/register.jsp").forward(req, resp);
+        req.setAttribute("view","/WEB-INF/register.jsp");
     }
 
     @Override
@@ -62,6 +62,6 @@ public class StudentUpdateServlet extends HttpServlet {
         }
 
         //todo /student/view?id=student1 <-- redirect
-        resp.sendRedirect("/student/view?id=" + student.getId());
+        req.setAttribute("view","redirect:/student/view?id=" + student.getId());
     }
 }
